@@ -45,3 +45,27 @@ export const authMiddleware = async (req, res, next) => {
     res.status(500).json({ message: "Error authenticating user" });
   }
 };
+
+// there is another way to write this middleware
+export const isAdmin = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        role: true,
+      },
+    });
+
+    if (!user || user.role !== "ADMIN") {
+      return res.status(404).json({ message: "Unauthorized User" });
+    }
+
+    next();
+  } catch (error) {
+    console.error("Error authenticating user : ", error);
+    res.status(500).json({ message: "Error authenticating user" });
+  }
+};
