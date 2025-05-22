@@ -84,4 +84,32 @@ export const updateProblemById = async (req, res) => {};
 
 export const deleteProblemById = async (req, res) => {};
 
-export const getAllProblemSolvedByUser = async (req, res) => {};
+
+// some method in postgreSQL 
+export const getAllProblemSolvedByUser = async (req, res) => {
+  try {
+    const problems = await db.problem.findMany({
+      where: {
+        solvdedBy: {
+          some: {
+            userId: req.user.id,
+          },
+        },
+      },
+      include: {
+        solvedBy: {
+          where: {
+            userId: req.user.id,
+          },
+        },
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Problem fetched successfully",
+    });
+  } catch (error) {
+    // handle this catch error
+  }
+};
