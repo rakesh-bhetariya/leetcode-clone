@@ -20,6 +20,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/problem", problemRoutes);
 app.use("/api/v1/execute-code", exectionRoute);
 app.use("/api/v1/submission", submissionRoutes);
+app.use("/api/v1/playlist", playlistRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
