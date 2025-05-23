@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router";
+import { Toaster } from "react-hot-toast";
 import HomePage from "./page/HomePage";
 import LoginPage from "./page/LoginPage";
 import SignupPage from "./page/SignupPage";
@@ -8,6 +9,7 @@ function App() {
   let authUser = null;
   return (
     <div className="flex flex-col items-center justify-start">
+      <Toaster />
       <Routes>
         <Route
           path="/"
