@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import authRoutes from "../src/routes/auth.routes.js";
 import authRoutes from "../src/routes/problem.routes.js";
@@ -12,6 +13,11 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.get("/", (req, res) => {
   res.send("Hello guys welcomes Leetcode clone 🔥");
 });
