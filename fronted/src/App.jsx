@@ -32,16 +32,21 @@ function App() {
             element={authUser ? <HomePage /> : <Navigate to={"login"} />}
           />
         </Route>
-
         <Route
           path="/login"
           element={!authUser ? <LoginPage /> : <Navigate to={"/"} />}
         />
-
         <Route
           path="/signup"
           element={!authUser ? <SignupPage /> : <Navigate to={"/"} />}
         />
+
+        <Route element={<AdminRoute />}>
+          <Route
+            path="/add-problem"
+            element={authUser ? <AddProblem /> : <Navigate to={"/"} />}
+          />
+        </Route>
       </Routes>
     </div>
   );
