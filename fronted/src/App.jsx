@@ -4,9 +4,23 @@ import { Toaster } from "react-hot-toast";
 import HomePage from "./page/HomePage";
 import LoginPage from "./page/LoginPage";
 import SignupPage from "./page/SignupPage";
+import { useAuthStore } from "./store/useAuthStore";
+import { Loader } from "lucide-react";
 
 function App() {
-  let authUser = null;
+  const { authUser, checkAuth, isChekingAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (isChekingAuth && !authUser) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col items-center justify-start">
       <Toaster />
